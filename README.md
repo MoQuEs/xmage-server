@@ -23,7 +23,7 @@ git pull https://github.com/MoQuEs/docker-xmage-alpine.git
 bash ./docker-xmage-alpine/dockerStartDocker.sh
 ```
 
-# Update to Usage 2
+### Update to Usage 2
 ```bash
 bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
