@@ -1,6 +1,6 @@
 # Minimal XMage Server based on Alpine
 
-## Usage
+## Usage 1
 ```bash
 docker run --rm -it \
 	-p 17171:17171 \
@@ -10,17 +10,25 @@ docker run --rm -it \
 	moques/docker-xmage-alpine
 ```
 
-
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. 
 Using the `XMAGE_*` environment variables you can modify the `config.xml` file.
 You should always set `XMAGE_DOCKER_SERVER_ADDRESS` to the same value as `--add-host`.
-
 If you dont have a Domain you can use a service like http://nip.io.
 
 If you like to preserve the database during updates and restarts you can mount a volume at /xmage/mage-server/db
 
+## Usage 2 "full and easy with standard config and domain on http://nip.io."
+```bash
+git pull https://github.com/MoQuEs/docker-xmage-alpine.git
+bash ./docker-xmage-alpine/dockerStartDocker.sh
+```
 
-## Example Docker Compose file
+# Update to Usage 2
+```bash
+bash ./docker-xmage-alpine/dockerFullUpdate.sh
+```
+
+## Full example Docker Compose file
 ```yaml
 version: '3.7'
 services:
