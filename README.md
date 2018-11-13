@@ -7,7 +7,7 @@ docker run --rm -it \
 	-p 17179:17179 \
 	--add-host example.com:0.0.0.0 \
 	-e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
-	moques/xmage-alpine
+	moques/docker-xmage-alpine
 ```
 
 
@@ -25,7 +25,7 @@ If you like to preserve the database during updates and restarts you can mount a
 version: '3.7'
 services:
  mage:
-  image: moques/xmage-alpine
+  image: moques/docker-xmage-alpine
   ports:
    - "17171:17171"
    - "17179:17179"
