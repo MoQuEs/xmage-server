@@ -17,7 +17,7 @@ sed -i "s/MaxPermSize=256M/MaxPermSize="$halfHalf"M/g" /home/xmage/docker-compos
 
 if [[ $(crontab -l | egrep -v "^(#|$)" | grep "docker restart" | wc -l) == 0 ]]
 then
-	(crontab -l; echo "0 7 * * * docker restart $(docker ps -aq)" ) | crontab -
+	(crontab -l; echo '0 7 * * * docker restart $(docker ps -aq)' ) | crontab -
 fi
 
 docker stop $(docker ps -aq)
