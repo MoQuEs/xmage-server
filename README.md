@@ -1,14 +1,14 @@
-# XMage Server based on Alpine
-
-[![](https://images.microbadger.com/badges/image/goesta/xmage-alpine.svg)](https://microbadger.com/images/goesta/xmage-alpine)
+# Minimal XMage Server based on Alpine
 
 ## Usage
-    docker run --rm -it \
-        -p 17171:17171 \
-        -p 17179:17179 \
-        --add-host example.com:0.0.0.0 \
-        -e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
-        goesta/xmage-alpine
+```bash
+docker run --rm -it \
+	-p 17171:17171 \
+	-p 17179:17179 \
+	--add-host example.com:0.0.0.0 \
+	-e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
+	moques/xmage-alpine
+```
 
 
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. 
@@ -21,30 +21,61 @@ If you like to preserve the database during updates and restarts you can mount a
 
 
 ## Example Docker Compose file
+```yaml
+version: '3.7'
+services:
+ mage:
+  image: moques/xmage-alpine
+  ports:
+   - "17171:17171"
+   - "17179:17179"
+  extra_hosts:
+   - "example.com:0.0.0.0"
+  environment:
+   - Xms=256M
+   - Xmx=512M
+   - MaxPermSize=256M
+   - serverAddress=example.com
+   - serverName=mage-server
+   - port=17171
+   - secondaryBindPort=17179
+   - backlogSize=800
+   - numAcceptThreads=6
+   - maxPoolSize=1000
+   - leasePeriod=12000
+   - socketWriteTimeout=10000
+   - maxGameThreads=40
+   - maxSecondsIdle=600
+   - minUserNameLength=1
+   - maxUserNameLength=32
+   - userNamePattern=[^a-z0-9]
+   - invalidUserNamePattern=[^a-z0-9]
+   - minPasswordLength=0
+   - maxPasswordLength=100
+   - maxAiOpponents=50
+   - saveGameActivated=false
+   - authenticationActivated=false
+   - googleAccount=
+   - mailgunApiKey=
+   - mailgunDomain=
+   - mailSmtpHost=
+   - mailSmtpPort=
+   - mailUser=
+   - mailPassword=
+   - mailFromAddress=
+  volumes:
+   - xmage-db:/xmage/mage-server/db
+   - xmage-saved:/xmage/mage-server/saved
+volumes:
+ xmage-db:
+  driver: local
+ xmage-saved:
+  driver: local
+```
 
-    version: '2'
-    services:
-    mage:
-        image: goesta/xmage-alpine
-        ports:
-         - "17171:17171"
-         - "17179:17179"
-        extra_hosts:
-         - "example.com:0.0.0.0"
-        environment:
-         - XMAGE_DOCKER_SERVER_ADDRESS=example.com
-         - XMAGE_DOCKER_SERVER_NAME=xmage-server
-         - XMAGE_DOCKER_MAX_SECONDS_IDLE=6000
-         - XMAGE_DOCKER_AUTHENTICATION_ACTIVATED=false
-        volumes:
-         - xmage-db:/xmage/mage-server/db
-         - xmage-saved:/xmage/mage-server/saved
-    volumes:
-        xmage-db:
-            driver: local
-        xmage-saved:
-            driver: local
 
 ## Links
-
-[Tutorial - Running XMage on DigitalOcean](https://github.com/goesta/docker-xmage-alpine/wiki/DigitalOcean-Tutorial)
+[GitHub - Main](https://github.com/MoQuEs/docker-xmage-alpine/)
+[Docker - Main](https://hub.docker.com/r/moques/xmage-alpine/)
+[GitHub - Based On](https://github.com/goesta/docker-xmage-alpine/)
+[Docker - Based On](https://hub.docker.com/r/goesta/xmage-alpine/)
