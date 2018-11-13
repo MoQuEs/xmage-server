@@ -6,7 +6,7 @@ cp ./docker-compose.yml /home/xmage/docker-compose.yml
 cd /home/xmage
 
 IP_ADRESS=`ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1 | grep "" -m1`
-sed -i "s/example.com/$(IP_ADRESS).nip.io/g" /home/xmage/docker-compose.yml
+sed -i "s/example.com/"$IP_ADRESS".nip.io/g" /home/xmage/docker-compose.yml
 
 mem=`free -m | grep 'Mem' | awk '{print $2}'`
 half=$(($mem/2))
