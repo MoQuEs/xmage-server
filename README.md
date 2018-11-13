@@ -76,6 +76,6 @@ volumes:
 
 ## Links
 [GitHub - Main](https://github.com/MoQuEs/docker-xmage-alpine/)
-[Docker - Main](https://hub.docker.com/r/moques/xmage-alpine/)
+[Docker - Main](https://hub.docker.com/r/moques/docker-xmage-alpine/)
 [GitHub - Based On](https://github.com/goesta/docker-xmage-alpine/)
 [Docker - Based On](https://hub.docker.com/r/goesta/xmage-alpine/)
