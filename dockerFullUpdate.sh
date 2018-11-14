@@ -1,9 +1,12 @@
 #!/bin/sh
 
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-docker rmi $(docker images -q)
+CURRENT_DIR=$(dirname "$0")
+
+docker stop moques_docker-xmage-alpine
+docker rm moques_docker-xmage-alpine
+docker rmi moques/docker-xmage-alpine
+
 git reset --hard origin/master
 git pull
 
-bash ./dockerStartDocker.sh
+bash $CURRENT_DIR"/dockerStartDocker.sh"

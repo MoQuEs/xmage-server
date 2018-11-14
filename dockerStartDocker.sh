@@ -32,11 +32,11 @@ then
 	(crontab -l; echo "0 7 * * * bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
 fi
 
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-docker rmi $(docker images -q)
-docker-compose -f $CURRENT_DIR"/docker-compose.yml" up --remove-orphans --force-recreate --build --no-start
-docker start $(docker ps -aq)
+docker stop moques_docker-xmage-alpine
+docker rm moques_docker-xmage-alpine
+docker rmi moques/docker-xmage-alpine
+
+docker-compose -f $CURRENT_DIR"/docker-compose.yml" up --remove-orphans --force-recreate --build -d
 
 
 echo "SERVER: $IP_ADRESS.nip.io"
