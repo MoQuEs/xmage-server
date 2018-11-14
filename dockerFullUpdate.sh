@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CURRENT_DIR=$(dirname "$0")
+CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
 docker stop moques_docker-xmage-alpine
 docker rm moques_docker-xmage-alpine

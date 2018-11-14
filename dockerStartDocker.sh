@@ -4,7 +4,7 @@ apt-get update -y
 apt-get install docker.io docker-compose -y
 
 
-CURRENT_DIR=$(dirname "$0")
+CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
 
 IP_ADRESS=''
