@@ -1,0 +1,50 @@
+version: '2'
+services:
+ mage:
+  image: moques/docker-xmage-alpine:latest
+  container_name: moques_docker-xmage-alpine
+  ports:
+   - "17171:17171"
+   - "17179:17179"
+  extra_hosts:
+   - "example.com:0.0.0.0"
+  environment:
+   - Xms=256M
+   - Xmx=512M
+   - MaxPermSize=256M
+   - serverAddress=example.com
+   - serverName=mage-server
+   - port=17171
+   - secondaryBindPort=17179
+   - backlogSize=800
+   - numAcceptThreads=6
+   - maxPoolSize=1000
+   - leasePeriod=12000
+   - socketWriteTimeout=10000
+   - maxGameThreads=40
+   - maxSecondsIdle=600
+   - minUserNameLength=1
+   - maxUserNameLength=32
+   - userNamePattern=[^a-z0-9]
+   - invalidUserNamePattern=[^a-z0-9]
+   - minPasswordLength=0
+   - maxPasswordLength=100
+   - maxAiOpponents=50
+   - saveGameActivated=false
+   - authenticationActivated=false
+   - googleAccount=
+   - mailgunApiKey=
+   - mailgunDomain=
+   - mailSmtpHost=
+   - mailSmtpPort=
+   - mailUser=
+   - mailPassword=
+   - mailFromAddress=
+  volumes:
+   - xmage-db:/xmage/mage-server/db
+   - xmage-saved:/xmage/mage-server/saved
+volumes:
+ xmage-db:
+  driver: local
+ xmage-saved:
+  driver: local
