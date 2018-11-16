@@ -36,7 +36,7 @@ fi
 
 docker stop moques_docker-xmage-alpine
 docker rm moques_docker-xmage-alpine
-docker rmi moques/docker-xmage-alpine
+docker rmi $(docker images |grep 'docker-xmage-alpine')
 
 docker-compose -f $CURRENT_DIR"/docker-compose.yml" up --remove-orphans --force-recreate --build -d
 

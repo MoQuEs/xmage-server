@@ -20,12 +20,12 @@ If you like to preserve the database during updates and restarts you can mount a
 ## Usage 2 "full and easy with standard config and domain on http://nip.io."
 ```bash
 git clone https://github.com/MoQuEs/docker-xmage-alpine.git
-bash ./docker-xmage-alpine/dockerStartDocker.sh
+sudo bash ./docker-xmage-alpine/dockerStartDocker.sh
 ```
 
 ### Update to Usage 2
 ```bash
-bash ./docker-xmage-alpine/dockerFullUpdate.sh
+sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
 
 ## Full example Docker Compose file
@@ -33,7 +33,8 @@ bash ./docker-xmage-alpine/dockerFullUpdate.sh
 version: '2'
 services:
  mage:
-  image: moques/docker-xmage-alpine
+  image: moques/docker-xmage-alpine:xmage-1.4.31V4
+  container_name: moques_docker-xmage-alpine
   ports:
    - "17171:17171"
    - "17179:17179"
