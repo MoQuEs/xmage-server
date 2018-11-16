@@ -3,6 +3,7 @@ FROM anapsix/alpine-java:8_server-jre
 ENV Xms="256M" \
     Xmx="512M" \
     MaxPermSize="256M" \
+    adminPassword="admin" \
     serverAddress="0.0.0.0" \
     serverName="mage-server" \
     port="17171" \

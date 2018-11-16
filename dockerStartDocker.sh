@@ -28,9 +28,11 @@ sed -i "s/MaxPermSize=256M/MaxPermSize="$halfHalf"M/g" $CURRENT_DIR"/docker-comp
 
 if [[ $(crontab -l | egrep -v "^(#|$)" | grep "dockerFullUpdate" | wc -l) == 0 ]]
 then
-	(crontab -l; echo "@reboot bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
-	(crontab -l; echo "0 7 * * * bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
+	(crontab -l; echo "@reboot sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
+	(crontab -l; echo "0 7 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
+	(crontab -l; echo "0 19 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
 fi
+
 
 docker stop moques_docker-xmage-alpine
 docker rm moques_docker-xmage-alpine
