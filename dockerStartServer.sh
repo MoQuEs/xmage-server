@@ -31,5 +31,7 @@ sed -i -e "s#\(mailUser=\)[\"].*[\"]#\1\"$mailUser\"#g" ${XMAGE_CONFIG}
 sed -i -e "s#\(mailPassword=\)[\"].*[\"]#\1\"$mailPassword\"#g" ${XMAGE_CONFIG}
 sed -i -e "s#\(mailFromAddress=\)[\"].*[\"]#\1\"$mailFromAddress\"#g" ${XMAGE_CONFIG}
 
+
 LIB=$(ls /xmage/mage-server/lib | egrep "mage-server-[0-9]+.[0-9]+.[0-9]+.jar")
-java -Xms$Xms -Xmx$Xmx -XX:MaxPermSize=$MaxPermSize -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -Dlog4j.configuration=file:./config/log4j.properties  -DadminPassword=$adminPassword -jar ./lib/$LIB -adminPassword=$adminPassword
+java -Xms$Xms -Xmx$Xmx -XX:MaxPermSize=$MaxPermSize -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -Dlog4j.configuration=file:./config/log4j.properties -DtestMode=true -DadminPassword=$adminPassword -jar ./lib/$LIB -testMode=true -adminPassword=$adminPassword
+
