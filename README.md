@@ -11,7 +11,7 @@ docker run --rm -it \
 ```
 
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. 
-Using the `XMAGE_*` environment variables you can modify the `config.xml` file.
+Using environment variables you can modify the `config.xml` file.
 You should always set `serverAddress` to the same value as `--add-host`.
 If you dont have a Domain you can use a service like http://nip.io.
 
@@ -33,7 +33,7 @@ sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 version: '2'
 services:
  mage:
-  image: moques/docker-xmage-alpine:xmage-1.4.31V4
+  image: moques/docker-xmage-alpine:xmage-1.4.32V0
   container_name: moques_docker-xmage-alpine
   ports:
    - "17171:17171"
