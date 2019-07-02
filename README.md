@@ -33,7 +33,7 @@ sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 version: '2'
 services:
  mage:
-  image: moques/docker-xmage-alpine:xmage-1.4.33V0
+  image: moques/docker-xmage-alpine:xmage_1.4.37V1
   container_name: moques_docker-xmage-alpine
   ports:
    - "17171:17171"
@@ -42,7 +42,7 @@ services:
    - "example.com:0.0.0.0"
   environment:
    - Xms=256M
-   - Xmx=512M
+   - Xmx=1024m
    - MaxPermSize=256M
    - adminPassword=admin
    - serverAddress=example.com
@@ -85,7 +85,7 @@ volumes:
 
 
 ## Links
-[GitHub - Main](https://github.com/MoQuEs/docker-xmage-alpine/)
-[Docker - Main](https://hub.docker.com/r/moques/docker-xmage-alpine/)
-[GitHub - Based On](https://github.com/goesta/docker-xmage-alpine/)
+[GitHub - Main](https://github.com/MoQuEs/docker-xmage-alpine/) \
+[Docker - Main](https://hub.docker.com/r/moques/docker-xmage-alpine/) \
+[GitHub - Based On](https://github.com/goesta/docker-xmage-alpine/) \
 [Docker - Based On](https://hub.docker.com/r/goesta/xmage-alpine/)

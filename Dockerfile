@@ -1,7 +1,7 @@
 FROM anapsix/alpine-java:8_server-jre
 
 ENV Xms="256M" \
-    Xmx="512M" \
+    Xmx="1024M" \
     MaxPermSize="256M" \
     adminPassword="admin" \
     serverAddress="0.0.0.0" \
@@ -39,7 +39,7 @@ RUN set -ex && \
 
 WORKDIR /xmage
 
-RUN curl --silent --show-error https://github.com/magefree/mage/releases/download/xmage_1.4.33V0/xmage_1.4.33V0.zip > xmage.zip \
+RUN curl --silent --show-error https://github.com/magefree/mage/releases/download/xmage_1.4.37V1/xmage_1.4.37V1.zip > xmage.zip \
  && unzip xmage.zip -x "mage-client*" \
  && rm xmage.zip \
  && apk del curl jq
