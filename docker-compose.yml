@@ -1,7 +1,7 @@
 version: '2'
 services:
  mage:
-  image: moques/docker-xmage-alpine:xmage_1.4.37V1
+  image: moques/docker-xmage-alpine:xmage-1.4.37V1
   container_name: moques_docker-xmage-alpine
   ports:
    - "17171:17171"
@@ -10,7 +10,7 @@ services:
    - "example.com:0.0.0.0"
   environment:
    - Xms=256M
-   - Xmx=1024M
+   - Xmx=512M
    - MaxPermSize=256M
    - adminPassword=admin
    - serverAddress=example.com
