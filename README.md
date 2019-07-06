@@ -33,7 +33,7 @@ sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 version: '2'
 services:
  mage:
-  image: moques/docker-xmage-alpine:xmage_1.4.37V1
+  image: moques/docker-xmage-alpine:xmage_1.4.37V2
   container_name: moques_docker-xmage-alpine
   ports:
    - "17171:17171"
