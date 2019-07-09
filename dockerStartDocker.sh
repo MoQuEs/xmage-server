@@ -33,5 +33,3 @@ docker-compose -f $CURRENT_DIR"/docker-compose.yml" up --remove-orphans --force-
 
 
 echo "SERVER: $IP_ADRESS.nip.io"
-
-

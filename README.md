@@ -17,20 +17,21 @@ If you dont have a Domain you can use a service like http://nip.io.
 
 If you like to preserve the database during updates and restarts you can mount a volume at /xmage/mage-server/db
 
-## Usage 2 "full and easy with standard config and domain on http://nip.io."
+## Usage 2 "full and easy with standard config and domain on http://nip.io"
 ```bash
 git clone https://github.com/MoQuEs/docker-xmage-alpine.git
 sudo bash ./docker-xmage-alpine/dockerStartDocker.sh
 ```
 
-### Update to Usage 2
+### Update to Usage 2 (auto restart/update)
 ```bash
 sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
 
-### Update server/vps:
+### Update/Install requirements:
 ```bash
-sudo bash ./docker-xmage-alpine/updateServerAndInstallRequirements.sh
+apt-get update -y
+apt-get install git docker.io docker-compose -y
 ```
 
 ## Full example Docker Compose file
@@ -47,7 +48,7 @@ services:
    - "example.com:0.0.0.0"
   environment:
    - Xms=256M
-   - Xmx=1024m
+   - Xmx=512M
    - MaxPermSize=256M
    - adminPassword=admin
    - serverAddress=example.com
