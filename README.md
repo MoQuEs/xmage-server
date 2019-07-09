@@ -25,6 +25,7 @@ sudo bash ./docker-xmage-alpine/dockerStartDocker.sh
 
 ### Update to Usage 2 (auto restart/update)
 ```bash
+git clone https://github.com/MoQuEs/docker-xmage-alpine.git
 sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
 

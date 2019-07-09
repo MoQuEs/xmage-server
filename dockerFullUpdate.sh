@@ -19,6 +19,7 @@ then
     echo "======================"
     echo ""
     echo ""
+    cd $CURRENT_DIR
     git reset --hard origin/master
     git pull
     sudo bash $CURRENT_DIR"/dockerStartDocker.sh"
