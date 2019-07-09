@@ -11,7 +11,7 @@ then
 	(crontab -l; echo "0 19 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
 fi
 
-
+cd $CURRENT_DIR
 if [[ $(git log HEAD..origin/master --oneline | wc -l) > 0 || $(docker ps | grep "moques_docker-xmage-alpine" | wc -l) == 0 ]]
 then
     echo "======================"
@@ -19,7 +19,6 @@ then
     echo "======================"
     echo ""
     echo ""
-    cd $CURRENT_DIR
     git reset --hard origin/master
     git pull
     sudo bash $CURRENT_DIR"/dockerStartDocker.sh"
