@@ -1,8 +1,5 @@
 #!/bin/sh
 
-apt-get update -y
-apt-get install docker.io docker-compose -y
-
 
 CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
@@ -26,20 +23,15 @@ sed -i "s/Xmx=512M/Xmx="$mem"M/g" $CURRENT_DIR"/docker-compose.yml"
 sed -i "s/MaxPermSize=256M/MaxPermSize="$halfHalf"M/g" $CURRENT_DIR"/docker-compose.yml"
 
 
-if [[ $(crontab -l | egrep -v "^(#|$)" | grep "dockerFullUpdate" | wc -l) == 0 ]]
-then
-	(crontab -l; echo "@reboot sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
-	(crontab -l; echo "0 7 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
-	(crontab -l; echo "0 19 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
-fi
-
-
 docker stop moques_docker-xmage-alpine
 docker rm moques_docker-xmage-alpine
 docker rmi moques/docker-xmage-alpine
 docker rmi $(docker images | grep 'docker-xmage-alpine' | awk '{print $3}')
 
+
 docker-compose -f $CURRENT_DIR"/docker-compose.yml" up --remove-orphans --force-recreate --build -d
 
 
 echo "SERVER: $IP_ADRESS.nip.io"
+
+

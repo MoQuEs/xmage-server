@@ -28,6 +28,11 @@ sudo bash ./docker-xmage-alpine/dockerStartDocker.sh
 sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
 
+### Update server/vps:
+```bash
+sudo bash ./docker-xmage-alpine/updateServerAndInstallRequirements.sh
+```
+
 ## Full example Docker Compose file
 ```yaml
 version: '2'
