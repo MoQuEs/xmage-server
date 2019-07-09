@@ -4,6 +4,9 @@
 CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
 
+cd $CURRENT_DIR
+
+
 if [[ $(crontab -l | egrep -v "^(#|$)" | grep "dockerFullUpdate" | wc -l) == 0 ]]
 then
 	(crontab -l; echo "@reboot sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
@@ -11,7 +14,10 @@ then
 	(crontab -l; echo "0 19 * * * sudo bash "$CURRENT_DIR"/dockerFullUpdate.sh" ) | crontab -
 fi
 
-cd $CURRENT_DIR
+
+git fetch
+
+
 if [[ $(git log HEAD..origin/master --oneline | wc -l) > 0 || $(docker ps | grep "moques_docker-xmage-alpine" | wc -l) == 0 ]]
 then
     echo "======================"
