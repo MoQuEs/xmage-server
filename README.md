@@ -29,65 +29,65 @@ git clone https://github.com/MoQuEs/docker-xmage-alpine.git
 sudo bash ./docker-xmage-alpine/dockerFullUpdate.sh
 ```
 
-### Update/Install requirements:
+### Install requirements:
 ```bash
-apt-get update -y
-apt-get install git docker.io docker-compose -y
+apt-get update
+apt-get install git docker.io docker-compose
 ```
 
 ## Full example Docker Compose file
 ```yaml
 version: '2'
 services:
- mage:
-  image: moques/docker-xmage-alpine:xmage_1.4.37V3
-  container_name: moques_docker-xmage-alpine
-  ports:
-   - "17171:17171"
-   - "17179:17179"
-  extra_hosts:
-   - "example.com:0.0.0.0"
-  environment:
-   - Xms=256M
-   - Xmx=512M
-   - MaxPermSize=256M
-   - adminPassword=admin
-   - serverAddress=example.com
-   - serverName=mage-server
-   - port=17171
-   - secondaryBindPort=17179
-   - backlogSize=800
-   - numAcceptThreads=6
-   - maxPoolSize=1000
-   - leasePeriod=12000
-   - socketWriteTimeout=10000
-   - maxGameThreads=40
-   - maxSecondsIdle=600
-   - minUserNameLength=1
-   - maxUserNameLength=32
-   - userNamePattern=[^a-z0-9]
-   - invalidUserNamePattern=[^a-z0-9]
-   - minPasswordLength=0
-   - maxPasswordLength=100
-   - maxAiOpponents=50
-   - saveGameActivated=false
-   - authenticationActivated=false
-   - googleAccount=
-   - mailgunApiKey=
-   - mailgunDomain=
-   - mailSmtpHost=
-   - mailSmtpPort=
-   - mailUser=
-   - mailPassword=
-   - mailFromAddress=
-  volumes:
-   - xmage-db:/xmage/mage-server/db
-   - xmage-saved:/xmage/mage-server/saved
+    mage:
+        image: moques/docker-xmage-alpine:xmage-1.4.37V4
+        container_name: moques_docker-xmage-alpine
+        ports:
+            - "17171:17171"
+            - "17179:17179"
+        extra_hosts:
+            - "example.com:0.0.0.0"
+        environment:
+            - Xms=256M
+            - Xmx=512M
+            - MaxPermSize=256M
+            - adminPassword=admin
+            - serverAddress=example.com
+            - serverName=mage-server
+            - port=17171
+            - secondaryBindPort=17179
+            - backlogSize=800
+            - numAcceptThreads=6
+            - maxPoolSize=1000
+            - leasePeriod=12000
+            - socketWriteTimeout=10000
+            - maxGameThreads=40
+            - maxSecondsIdle=600
+            - minUserNameLength=1
+            - maxUserNameLength=32
+            - userNamePattern=[^a-z0-9]
+            - invalidUserNamePattern=[^a-z0-9]
+            - minPasswordLength=0
+            - maxPasswordLength=100
+            - maxAiOpponents=50
+            - saveGameActivated=false
+            - authenticationActivated=false
+            - googleAccount=
+            - mailgunApiKey=
+            - mailgunDomain=
+            - mailSmtpHost=
+            - mailSmtpPort=
+            - mailUser=
+            - mailPassword=
+            - mailFromAddress=
+        volumes:
+            - xmage-db:/xmage/mage-server/db
+            - xmage-saved:/xmage/mage-server/saved
 volumes:
- xmage-db:
-  driver: local
- xmage-saved:
-  driver: local
+    xmage-db:
+        driver: local
+    xmage-saved:
+        driver: local
 ```
 
 
