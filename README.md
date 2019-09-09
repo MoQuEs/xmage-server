@@ -7,7 +7,7 @@ docker run --rm -it \
 	-p 17179:17179 \
 	--add-host example.com:0.0.0.0 \
 	-e "serverAddress=example.com" \
-	moques/docker-xmage-alpine
+	moques/docker-xmage-alpine:latest
 ```
 
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. 
@@ -15,7 +15,7 @@ Using environment variables you can modify the `config.xml` file.
 You should always set `serverAddress` to the same value as `--add-host`.
 If you dont have a Domain you can use a service like http://nip.io.
 
-If you like to preserve the database during updates and restarts you can mount a volume at /xmage/mage-server/db
+If you like to preserve the database during updates and restarts you can mount a volume at `/xmage/mage-server/db`
 
 ## Usage 2 "full and easy with standard config and domain on http://nip.io"
 ```bash
@@ -40,7 +40,7 @@ apt-get install git docker.io docker-compose
 version: '2'
 services:
     mage:
-        image: moques/docker-xmage-alpine:xmage-1.4.37V4
+        image: moques/docker-xmage-alpine:latest
         container_name: moques_docker-xmage-alpine
         ports:
             - "17171:17171"
