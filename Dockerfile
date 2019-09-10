@@ -32,17 +32,18 @@ ENV Xms="256M" \
     mailUser="" \
     mailPassword="" \
     mailFromAddress=""
-	
-RUN set -ex && \
-    apk upgrade --update && \
-    apk add --update curl jq 
+
+RUN set -ex \
+    && apk upgrade --update \
+    && apk add --update curl jq
 
 WORKDIR /xmage
 
-RUN curl --silent --show-error https://github.com/magefree/mage/releases/download/xmage_1.4.38V0/xmage_1.4.38V0.zip -L -o xmage.zip \
- && unzip xmage.zip -x "mage-client*" \
- && rm xmage.zip \
- && apk del curl jq
+RUN XMAGE_LINK=`curl -s https://api.github.com/repos/magefree/mage/releases/latest | grep "browser_download_url.*xmage_.*\.zip" | cut -d ":" -f 2,3 | tr -d \  | tr -d \"` \
+    && curl --silent --show-error "$XMAGE_LINK" -L -o xmage.zip \
+    && unzip xmage.zip -x "mage-client*" \
+    && rm xmage.zip \
+    && apk del curl jq
 
 COPY dockerStartServer.sh /xmage/mage-server/
 
