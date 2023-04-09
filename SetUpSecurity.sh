@@ -1,31 +1,28 @@
 #!/bin/bash
 
+export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
+source "${CURRENT_DIR}/LoadEnv.sh"
 
-PORT=22
-USER_CURRENT_IP=$(w | grep sshd | awk '{print $3}')
+if [[ ${SERVER_SETUP_SECURITY} == 1 ]]; then
 
+  if [[ $(ufw status | grep "${XMAGE_PORT}" | wc -l) == 0 ]] || [[ $(ufw status | grep "${XMAGE_SECONDARY_BIND_PORT}" | wc -l) == 0 ]] || [[ $(ufw status | grep "Status: inactive" | wc -l) == 1 ]]; then
+    ufw disable
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw allow ${SSH_CURRENT_PORT}/tcp
+    ufw allow ${XMAGE_PORT}/tcp
+    ufw allow ${XMAGE_PORT}/udp
+    ufw allow ${XMAGE_SECONDARY_BIND_PORT}/tcp
+    ufw allow ${XMAGE_SECONDARY_BIND_PORT}/udp
+    ufw --force enable
+  fi
 
-if [[ $(ufw status | grep "17171" | wc -l) == 0 ]] || [[ $(ufw status | grep "Status: inactive" | wc -l) == 1 ]]
-then
-  ufw disable
-  ufw default deny incoming
-  ufw default allow outgoing
-  ufw allow ${PORT}/tcp
-  ufw allow 17171/tcp
-  ufw allow 17179/tcp
-  ufw allow 17171/udp
-  ufw allow 17179/udp
-  ufw --force enable
-fi
-
-
-if [[ ! -f /etc/fail2ban/jail.local ]] || [[ $(cat /etc/fail2ban/jail.local | grep "AUTO CONFIG ADDED" | wc -l) == 0 ]]
-then
-  echo "
-;AUTO CONFIG ADDED
+  if [[ ! -f /etc/fail2ban/jail.local ]] || [[ $(cat /etc/fail2ban/jail.local | grep "AUTO CONFIG ADDED" | wc -l) == 0 ]]; then
+    echo "
+; AUTO CONFIG ADDED
 
 [DEFAULT]
-ignoreip = 127.0.0.1/8 192.168.0.0/16 ${USER_CURRENT_IP}
+ignoreip = 127.0.0.1/8 192.168.0.0/16 ${SSH_CURRENT_USER_IP}
 bantime  = 86400
 findtime  = 86400
 maxretry = 10
@@ -33,18 +30,18 @@ action = %(action_)s
 
 [ssh]
 enabled = true
-port = 22
+port = ${SSH_CURRENT_PORT}
 filter = sshd
 logpath = /var/log/auth.log
 maxretry = 5
 bantime = 600
-" >> /etc/fail2ban/jail.local
-fi
+" >>/etc/fail2ban/jail.local
+  fi
 
+  if [[ ! -f /etc/sysctl.conf ]] || [[ $(cat /etc/sysctl.conf | grep "AUTO CONFIG ADDED" | wc -l) == 0 ]]; then
+    echo "
+# AUTO CONFIG ADDED
 
-if [[ ! -f /etc/sysctl.conf ]] || [[ $(cat /etc/sysctl.conf | grep "# IP Spoofing protection" | wc -l) == 0 ]]
-then
-  echo "
 # IP Spoofing protection
 net.ipv4.conf.all.rp_filter = 1
 net.ipv4.conf.default.rp_filter = 1
@@ -80,5 +77,7 @@ net.ipv6.conf.default.accept_redirects = 0
 
 # Ignore Directed pings
 net.ipv4.icmp_echo_ignore_all = 1
-" >> /etc/sysctl.conf
+" >>/etc/sysctl.conf
+  fi
+
 fi

@@ -1,8 +1,9 @@
 #!/bin/bash
 
+export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
+source "${CURRENT_DIR}/LoadEnv.sh"
 
-CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
-
+chmod 755 "${CURRENT_DIR}/LoadEnv.sh"
 
 chmod 755 "${CURRENT_DIR}/InitServer.sh"
 
@@ -18,7 +19,4 @@ chmod 755 "${CURRENT_DIR}/XmageStart.sh"
 chmod 755 "${CURRENT_DIR}/XmageUpdate.sh"
 chmod 755 "${CURRENT_DIR}/XmageCheckIfHasUpdate.sh"
 
-chmod 755 "${CURRENT_DIR}/XmageServiceStart.sh"
-chmod 755 "${CURRENT_DIR}/XmageServiceRestart.sh"
-chmod 755 "${CURRENT_DIR}/XmageServiceStatus.sh"
 chmod 755 "${CURRENT_DIR}/XmageWaitForStartService.sh"
