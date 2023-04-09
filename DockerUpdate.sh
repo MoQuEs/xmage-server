@@ -2,8 +2,6 @@
 
 CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
-cd $CURRENT_DIR
-
 if [[ $(crontab -l | egrep -v "^(#|$)" | grep "DockerUpdate" | wc -l) == 0 ]]; then
   (
     crontab -l

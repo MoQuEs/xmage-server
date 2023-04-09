@@ -32,3 +32,12 @@ services:
       - saveGameActivated=false
       - authenticationActivated=false
       - adminPassword=admin
+    volumes:
+      - xmage-db:/xmage/mage-server/db
+      - xmage-saved:/xmage/mage-server/saved
+
+volumes:
+  xmage-db:
+    driver: local
+  xmage-saved:
+    driver: local

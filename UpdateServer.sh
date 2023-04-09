@@ -5,7 +5,7 @@ export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 apt update && apt upgrade -y && apt full-upgrade -y
 
 apt install -y \
-  curl bc net-tools wget zip jq \
+  curl bc net-tools wget unzip jq \
   unattended-upgrades \
   mc parallel \
   default-jdk default-jre

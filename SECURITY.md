@@ -112,11 +112,3 @@ Check if settings is saved:
 ```bash
 sysctl -p
 ```
-
-
-- Disable IP spoofing: \
-Content in file `/etc/host.conf` needs to match:
-```
-order bind,hosts
-nospoof on
-```
