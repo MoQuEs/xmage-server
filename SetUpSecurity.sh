@@ -17,9 +17,9 @@ if [[ ${SERVER_SETUP_SECURITY} == 1 ]]; then
     ufw --force enable
   fi
 
-  if [[ ! -f /etc/fail2ban/jail.local ]] || [[ $(cat /etc/fail2ban/jail.local | grep "AUTO CONFIG ADDED" | wc -l) == 0 ]]; then
+  if [[ ! -f /etc/fail2ban/jail.local ]] || [[ $(cat /etc/fail2ban/jail.local | grep "AUTO XMAGE CONFIG" | wc -l) == 0 ]]; then
     echo "
-; AUTO CONFIG ADDED
+; AUTO XMAGE CONFIG
 
 [DEFAULT]
 ignoreip = 127.0.0.1/8 192.168.0.0/16 ${SSH_CURRENT_USER_IP}
@@ -38,9 +38,9 @@ bantime = 600
 " >>/etc/fail2ban/jail.local
   fi
 
-  if [[ ! -f /etc/sysctl.conf ]] || [[ $(cat /etc/sysctl.conf | grep "AUTO CONFIG ADDED" | wc -l) == 0 ]]; then
+  if [[ ! -f /etc/sysctl.conf ]] || [[ $(cat /etc/sysctl.conf | grep "AUTO XMAGE CONFIG" | wc -l) == 0 ]]; then
     echo "
-# AUTO CONFIG ADDED
+# AUTO XMAGE CONFIG
 
 # IP Spoofing protection
 net.ipv4.conf.all.rp_filter = 1

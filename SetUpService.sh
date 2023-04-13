@@ -9,7 +9,8 @@ Description=${XMAGE_SERVER_NAME}
 
 [Service]
 ExecStart=bash ${CURRENT_DIR}/XmageServiceExec.sh
-Restart=on-abort
+Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target" >>/etc/systemd/system/xmage.service

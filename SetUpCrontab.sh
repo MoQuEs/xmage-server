@@ -3,7 +3,7 @@
 export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 source "${CURRENT_DIR}/LoadEnv.sh"
 
-if [[ $(crontab -l | egrep -v "^(#|$)" | grep "shutdown -r" | wc -l) == 0 ]]; then
+if [[ $(crontab -l | egrep -v "^(#|$)" | grep "UpdateServer.sh && sudo shutdown -r" | wc -l) == 0 ]]; then
   (
     crontab -l
     echo "0 7 * * * sudo bash ${CURRENT_DIR}/UpdateServer.sh && sudo shutdown -r"

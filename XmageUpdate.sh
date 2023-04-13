@@ -6,7 +6,8 @@ source "${CURRENT_DIR}/LoadEnv.sh"
 if [[ $(bash "${CURRENT_DIR}/XmageCheckIfHasUpdate.sh") == 1 ]]; then
   wget $(grep 'zip' ${XMAGE_NEW_LOCK}) -O ${XMAGE_ZIP}
   cp ${XMAGE_NEW_LOCK} ${XMAGE_OLD_LOCK}
-  unzip -o ${XMAGE_ZIP} -x "mage-client*"
+  unzip -o  'xmage/mage-server/*'
+  unzip -o ${XMAGE_ZIP} 'xmage/mage-server/*'
 
   sed -i -e "s#\(serverAddress=\)[\"].*[\"]#\1\"${XMAGE_SERVER_ADDRESS}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(serverName=\)[\"].*[\"]#\1\"${XMAGE_SERVER_NAME}\"#g" ${XMAGE_CONFIG}
@@ -21,10 +22,26 @@ if [[ $(bash "${CURRENT_DIR}/XmageCheckIfHasUpdate.sh") == 1 ]]; then
   sed -i -e "s#\(maxSecondsIdle=\)[\"].*[\"]#\1\"${XMAGE_MAX_SECONDS_IDLE}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(minUserNameLength=\)[\"].*[\"]#\1\"${XMAGE_MIN_USER_NAME_LENGTH}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(maxUserNameLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_USER_NAME_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(userNamePattern=\)[\"].*[\"]#\1\"${XMAGE_USER_NAME_PATTERN}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(invalidUserNamePattern=\)[\"].*[\"]#\1\"${XMAGE_INVALID_USER_NAME_PATTERN}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(minPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MIN_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(maxAiOpponents=\)[\"].*[\"]#\1\"${XMAGE_MAX_AI_OPPONENTS}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(saveGameActivated=\)[\"].*[\"]#\1\"${XMAGE_SAVE_GAME_ACTIVATED}\"#g" ${XMAGE_CONFIG}
+
   sed -i -e "s#\(authenticationActivated=\)[\"].*[\"]#\1\"${XMAGE_AUTHENTICATION_ACTIVATED}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(minPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MIN_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
 fi
