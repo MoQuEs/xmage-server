@@ -68,9 +68,6 @@ if [[ -d "${XMAGE_DIR}/lib" ]]; then
   export XMAGE_JAR="$(ls ${XMAGE_DIR}/lib | egrep "mage-server-[0-9]+.[0-9]+.[0-9]+.jar")"
 fi
 
-echo $XMAGE_ALLOWED_MEMORY
-exit
-
 export XMAGE_OLD_LOCK="${CURRENT_DIR}/old_xmage.lock"
 export XMAGE_NEW_LOCK="${CURRENT_DIR}/new_xmage.lock"
 
