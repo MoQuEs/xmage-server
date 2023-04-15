@@ -1,5 +1,7 @@
 /.idea/
 /xmage/
 
+/.env
+
 /xmage.zip
 /mage-full*.zip

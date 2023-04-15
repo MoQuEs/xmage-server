@@ -3,7 +3,7 @@
 export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 source "${CURRENT_DIR}/LoadEnv.sh"
 
-if [[ ! -f /etc/systemd/system/xmage.service ]] || [[ $(cat /etc/systemd/system/xmage.service | grep "[Service]" | wc -l) == 0 ]]; then
+if [[ ! -f /etc/systemd/system/xmage.service ]] || [[ $(cat /etc/systemd/system/xmage.service | grep "XmageServiceExec" | wc -l) == 0 ]]; then
   echo "[Unit]
 Description=${XMAGE_SERVER_NAME}
 

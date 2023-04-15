@@ -3,11 +3,19 @@
 export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 source "${CURRENT_DIR}/LoadEnv.sh"
 
-if [[ $(bash "${CURRENT_DIR}/XmageCheckIfHasUpdate.sh") == 1 ]]; then
+if [[ ! -f ${XMAGE_OLD_LOCK} ]]; then
+  touch ${XMAGE_OLD_LOCK}
+fi
+
+curl -s ${XMAGE_UPDATE_JSON} | jq -r '.XMage.full' > ${XMAGE_NEW_LOCK}
+
+sed -i '/^\s*$/d' ${XMAGE_OLD_LOCK}
+sed -i '/^\s*$/d' ${XMAGE_NEW_LOCK}
+
+if [[ $(diff -Bbw ${XMAGE_OLD_LOCK} ${XMAGE_NEW_LOCK} | wc -l) > 0 ]]; then
   wget $(grep 'zip' ${XMAGE_NEW_LOCK}) -O ${XMAGE_ZIP}
-  cp ${XMAGE_NEW_LOCK} ${XMAGE_OLD_LOCK}
-  unzip -o  'xmage/mage-server/*'
   unzip -o ${XMAGE_ZIP} 'xmage/mage-server/*'
+  cp ${XMAGE_NEW_LOCK} ${XMAGE_OLD_LOCK}
 
   sed -i -e "s#\(serverAddress=\)[\"].*[\"]#\1\"${XMAGE_SERVER_ADDRESS}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(serverName=\)[\"].*[\"]#\1\"${XMAGE_SERVER_NAME}\"#g" ${XMAGE_CONFIG}
@@ -31,17 +39,14 @@ if [[ $(bash "${CURRENT_DIR}/XmageCheckIfHasUpdate.sh") == 1 ]]; then
   sed -i -e "s#\(minPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MIN_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
   sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
 
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
-  sed -i -e "s#\(maxPasswordLength=\)[\"].*[\"]#\1\"${XMAGE_MAX_PASSWORD_LENGTH}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(googleAccount=\)[\"].*[\"]#\1\"${XMAGE_GOOGLE_ACCOUNT}\"#g" ${XMAGE_CONFIG}
+
+  sed -i -e "s#\(mailgunApiKey=\)[\"].*[\"]#\1\"${XMAGE_MAILGUN_API_KEY}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(mailgunDomain=\)[\"].*[\"]#\1\"${XMAGE_MAILGUN_DOMAIN}\"#g" ${XMAGE_CONFIG}
+
+  sed -i -e "s#\(mailSmtpHost=\)[\"].*[\"]#\1\"${XMAGE_MAIL_SMTP_HOST}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(mailSmtpPort=\)[\"].*[\"]#\1\"${XMAGE_MAIL_SMTP_PORT}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(mailUser=\)[\"].*[\"]#\1\"${XMAGE_MAIL_USER}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(mailPassword=\)[\"].*[\"]#\1\"${XMAGE_MAIL_PASSWORD}\"#g" ${XMAGE_CONFIG}
+  sed -i -e "s#\(mailFromAddress=\)[\"].*[\"]#\1\"${XMAGE_MAIL_FROM_ADDRESS}\"#g" ${XMAGE_CONFIG}
 fi

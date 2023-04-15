@@ -22,19 +22,21 @@ if [[ ${SERVER_SETUP_SECURITY} == 1 ]]; then
 ; AUTO XMAGE CONFIG
 
 [DEFAULT]
-ignoreip = 127.0.0.1/8 192.168.0.0/16 ${SSH_CURRENT_USER_IP}
-bantime  = 86400
-findtime  = 86400
-maxretry = 10
-action = %(action_)s
+enabled = true
+maxretry = 5
+findtime = 300
+bantime = 3600
+ignoreip = 127.0.0.1/8 192.168.0.0/16
 
 [ssh]
-enabled = true
-port = ${SSH_CURRENT_PORT}
+port = ssh
 filter = sshd
 logpath = /var/log/auth.log
-maxretry = 5
-bantime = 600
+
+[sshd]
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
 " >>/etc/fail2ban/jail.local
   fi
 

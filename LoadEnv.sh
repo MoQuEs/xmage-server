@@ -2,17 +2,6 @@
 
 export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
-export SSH_CURRENT_USER=$(whoami)
-if [[ -t 1 ]]; then
-  export SSH_CURRENT_USER=$(logname)
-fi
-
-if [[ $(command -v w | wc -l) == 1 ]]; then
-  export SSH_CURRENT_USER_IP=$(w | grep sshd | grep "${SSH_CURRENT_USER}" | awk '{print $3}')
-else
-  export SSH_CURRENT_USER_IP=$(who | grep "${SSH_CURRENT_USER}" | awk '{print $5}' | grep --perl-regexp '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*' --only-matching | uniq)
-fi
-
 export SSH_CURRENT_PORT=$(netstat -tulpn | grep ssh | grep -e "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | awk '{print $4}' | sed -e 's#[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:##')
 
 export SERVER_IP=$(curl -s ifconfig.me)
@@ -42,6 +31,10 @@ export XMAGE_INVALID_USER_NAME_PATTERN='[^a-zA-Z0-9_- $]'
 export XMAGE_MAX_AI_OPPONENTS=50
 export XMAGE_SAVE_GAME_ACTIVATED='false'
 
+if [[ ! -f "${CURRENT_DIR}/.env" ]]; then
+  cp "${CURRENT_DIR}/.env.template" "${CURRENT_DIR}/.env"
+fi
+
 set -o allexport
 source "${CURRENT_DIR}/.env"
 set +o allexport
@@ -69,10 +62,17 @@ export XMAGE_UPDATE_JSON="http://xmage.today/config.json"
 
 export XMAGE_DIR="${CURRENT_DIR}/xmage/mage-server"
 export XMAGE_CONFIG="${XMAGE_DIR}/config/config.xml"
-export XMAGE_JAR="$(ls ${XMAGE_DIR}/lib | egrep "mage-server-[0-9]+.[0-9]+.[0-9]+.jar")"
+
+export XMAGE_JAR=""
+if [[ -d "${XMAGE_DIR}/lib" ]]; then
+  export XMAGE_JAR="$(ls ${XMAGE_DIR}/lib | egrep "mage-server-[0-9]+.[0-9]+.[0-9]+.jar")"
+fi
+
+echo $XMAGE_ALLOWED_MEMORY
+exit
 
 export XMAGE_OLD_LOCK="${CURRENT_DIR}/old_xmage.lock"
-export XMAGE_NEW_LOCK="${CURRENT_DIR}/old_xmage.lock"
+export XMAGE_NEW_LOCK="${CURRENT_DIR}/new_xmage.lock"
 
 export XMAGE_ZIP="${CURRENT_DIR}/xmage.zip"
 
