@@ -9,7 +9,7 @@ export SERVER_IP=$(curl -s ifconfig.me)
 export SERVER_SETUP_SECURITY=1
 
 export XMAGE_MINIMAL_MEMORY=256
-export XMAGE_ALLOWED_MEMORY=$(expr $(free -m | grep Mem | awk '{print $4}') - 100)
+export XMAGE_ALLOWED_MEMORY=$(expr $(free -m | grep Mem | awk '{print $2}') - $(free -m | grep Mem | awk '{print $3}'))
 
 export XMAGE_ADMIN_PASSWORD="test"
 
