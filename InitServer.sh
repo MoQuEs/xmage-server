@@ -14,5 +14,5 @@ bash "${CURRENT_DIR}/SetUpService.sh"
 bash "${CURRENT_DIR}/SetUpAlias.sh"
 bash "${CURRENT_DIR}/SetUpSecurity.sh"
 
-bash "${CURRENT_DIR}/ServiceXmageStart.sh"
+bash "${CURRENT_DIR}/ServiceXmageRestart.sh"
 bash "${CURRENT_DIR}/ServiceXmageWaitForStart.sh"
