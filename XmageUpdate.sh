@@ -14,8 +14,9 @@ curl -s ${XMAGE_UPDATE_JSON} | jq -r '.XMage.full' > ${XMAGE_NEW_LOCK}
 sed -i '/^\s*$/d' ${XMAGE_OLD_LOCK}
 sed -i '/^\s*$/d' ${XMAGE_NEW_LOCK}
 
+# TODO: Fix diff update
 if [[ $(diff -Bbw ${XMAGE_OLD_LOCK} ${XMAGE_NEW_LOCK} | wc -l) > 0 ]]; then
-  # TODO: Fix diff update
+  echo "# TODO: Fix diff update"
 fi
 
 wget $(grep 'zip' ${XMAGE_NEW_LOCK}) -O ${XMAGE_ZIP}
