@@ -10,33 +10,32 @@ For now you can use: [Beta XMage Server Docker Images](https://github.com/mage-d
 ## Directly on the server, with domain on http://nip.io
 All operation needs to by run from root.
 
-### 0. Optional:
-Change timezone
-```bash
-timedatectl list-timezones <- lists timezones
-timedatectl set-timezone TIMEZONE <- changes timezone
-```
+### 0. (Optional) Change timezone and/or update system
+1. Change timezone
+    ```bash
+    timedatectl list-timezones <- lists timezones
+    sudo timedatectl set-timezone TIMEZONE <- changes timezone
+    ```
+2. Update system (probably will require restart)
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    ```
 
-### 1. Install git:
-```bash
-apt install git
-```
+### 1. Install tools
+ ```bash
+ sudo apt install git curl wget unzip jq default-jdk default-jre
+ ```
 
-### 2. Get repository with all scripts:
+### 2. Get repository with all scripts
 ```bash
 git clone https://github.com/MoQuEs/xmage-server.git
 cd ./xmage-server
 ```
 
-### 3. Check settings:
-Template `.env.tamplate` has all settings with default values. \
-You may want to copy template `.env.tamplate` file as `.env` and change settings, if not scripts will copy template file as `.env`.
+### 3. Check settings
+Copy `.env.tamplate` as `.env` and change settings if you want to.
 ```bash
-SERVER_SETUP_SECURITY=1 <- Will setup basic security on server (fail2ban / firewall)
-
-SERVER_ADD_AUTO_UPDATE=1 <- Will add auto update to server (will not upgrade kernel)
-SERVER_ADD_AUTO_RESTART=1 <- Will add auto restart serwer after update
-
 #XMAGE_MINIMAL_MEMORY=256 <- Minimum memory that xmage server will consume in megabytes (not less than 256)
 #XMAGE_ALLOWED_MEMORY=512 <- Maximum memory that xmage server will consume in megabytes (not less than 512)
 
@@ -87,13 +86,13 @@ XMAGE_MAIL_FROM_ADDRESS='' <- sender address
 ### 4. Run main script:
 It will update / install / setup / start server / dependencies / xmage.
 ```bash
-bash ./InitServer.sh
+sudo bash ./InitServer.sh
 ```
 
 ## Check what xmage is doing:
 ```bash
-servce xmage start <- Start xmage server
-servce xmage stop <- Stop xmage server
-servce xmage restart <- Restart xmage server
-servce xmage status <- Print current server status
+service xmage start <- Start xmage server
+service xmage stop <- Stop xmage server
+service xmage restart <- Restart xmage server
+service xmage status <- Print current server status
 ```

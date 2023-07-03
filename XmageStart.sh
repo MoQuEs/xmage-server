@@ -5,6 +5,8 @@ source "${CURRENT_DIR}/LoadEnv.sh"
 
 cd ${XMAGE_DIR}
 
+i 'Starting MAGE server'
+
 java \
   -Xms${XMAGE_XMS} \
   -Xmx${XMAGE_XMX} \

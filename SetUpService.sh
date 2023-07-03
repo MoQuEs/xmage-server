@@ -14,8 +14,18 @@ RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target" >>/etc/systemd/system/xmage.service
+
+  s "Created service"
 fi
 
 systemctl daemon-reload
+
+s "Reloaded daemon"
+
 systemctl enable xmage
+
+s "Enabled service"
+
 systemctl daemon-reload
+
+s "Reloaded daemon again"

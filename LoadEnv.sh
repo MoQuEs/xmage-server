@@ -2,11 +2,10 @@
 
 export CURRENT_DIR=$(cd $(dirname "$0") && pwd -P)
 
-export SSH_CURRENT_PORT=$(netstat -tulpn | grep ssh | grep -e "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | awk '{print $4}' | sed -e 's#[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:##')
+source "${CURRENT_DIR}/Echo.sh"
+
 
 export SERVER_IP=$(curl -s ifconfig.me)
-
-export SERVER_SETUP_SECURITY=1
 
 export XMAGE_MINIMAL_MEMORY=256
 export XMAGE_ALLOWED_MEMORY=$(expr $(free -m | grep Mem | awk '{print $2}') - $(free -m | grep Mem | awk '{print $3}'))
